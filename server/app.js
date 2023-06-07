@@ -1,7 +1,22 @@
+const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
-const port = 8000;
+
+dotenv.config({ path: "./.env" });
+
+const port = process.env.PORT;
+
+// db connection
+
+const URI = process.env.DATABASE;
+
+mongoose
+  .connect(URI)
+  .then(() => {
+    console.log("database connection successfull");
+  })
+  .catch((error) => console.log(error));
 
 // use middeleware
 
@@ -9,8 +24,6 @@ middeleware = (req, res, next) => {
   console.log("this is middelwere response");
   next();
 };
-
-//mpdify
 
 // get routing
 
