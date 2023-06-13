@@ -1,0 +1,114 @@
+const express = require("express");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+require("../db/connection");
+const data = require("../userregister/datafom");
+
+// use middeleware
+
+middeleware = (req, res, next) => {
+  console.log("this is middelwere response");
+  next();
+};
+
+// get routing
+
+router.get("/", (req, res) => {
+  res.send("hello world this is home page from router created by nirbhay");
+});
+
+router.post("/register", async (req, res) => {
+  const { name, email, work, mobailno, password, cpassword } = req.body;
+
+  if (!name || !email || !work || !mobailno || !password || !cpassword) {
+    res.status(422).json({ error: "plese fill all fieled" });
+    console.log("all fesld not fill ");
+  }
+
+  try {
+    const passmatch = password === cpassword;
+
+    if (!passmatch) {
+      res.json({ error: "password not matched" });
+    }
+
+    const userexist = await data.findOne({ email: email });
+    if (userexist) {
+      res.status(422).json({ error: "user is allready exist" });
+    } else {
+      const user = new data({
+        name,
+        email,
+        work,
+        mobailno,
+        password,
+        cpassword,
+      });
+
+      await user.save();
+
+      res.status(200).json({ message: "registration successful" });
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("error feald error");
+  }
+});
+
+router.post("/signin", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      res.status(400).json({ message: "fill data in all feals" });
+    } else {
+      // res.json({ message: "data filed done" });
+    }
+
+    const userlogin = await data.findOne({ email: email });
+
+    const match = await bcrypt.compare(password, userlogin.password);
+
+    // console.log(userpass);
+    // console.log(userlogin);
+
+    if (userlogin) {
+      if (match) {
+        res.status(200).json({ message: "logged in " });
+      } else {
+        res.status(400).json({ message: "invalid information" });
+      }
+    } else {
+      res.status(400).json({ message: "invalid information" });
+    }
+  } catch (err) {
+    console.log("error from login ");
+  }
+});
+
+router.get("/about", middeleware, (req, res) => {
+  res.send("hello world this about page from  router created by nirbhay");
+  console.log("this is about response");
+});
+
+router.get("/service", (req, res) => {
+  res.send("hello world this is service page created by nirbhay");
+});
+
+router.get("/login", (req, res) => {
+  res.send("hello world this is login page created by nirbhay");
+});
+
+router.get("/singup", (req, res) => {
+  res.send("hello world this is signup page created by nirbhay");
+});
+
+router.get("/profile", (req, res) => {
+  res.send("hello world this is profile page after login created by nirbhay");
+});
+
+// router.listen(port, () => {
+//   console.log(`router renning on port no ${port}`);
+// });
+
+module.exports = router;
