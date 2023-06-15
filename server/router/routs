@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -28,10 +30,6 @@ router.post("/register", async (req, res) => {
   try {
     const passmatch = password === cpassword;
 
-    if (!passmatch) {
-      res.json({ error: "password not matched" });
-    }
-
     const userexist = await data.findOne({ email: email });
     if (userexist) {
       res.status(422).json({ error: "user is allready exist" });
@@ -45,15 +43,20 @@ router.post("/register", async (req, res) => {
         cpassword,
       });
 
-      await user.save();
-
-      res.status(200).json({ message: "registration successful" });
+      if (passmatch) {
+        await user.save();
+        res.status(200).json({ message: "registration successful" });
+      } else {
+        res.json({ error: "password not matched" });
+      }
     }
   } catch (error) {
     console.log(error);
-    console.log("error feald error");
+    console.log("registration feald error");
   }
 });
+
+//login part
 
 router.post("/signin", async (req, res) => {
   try {
@@ -61,19 +64,18 @@ router.post("/signin", async (req, res) => {
 
     if (!email || !password) {
       res.status(400).json({ message: "fill data in all feals" });
-    } else {
-      // res.json({ message: "data filed done" });
     }
 
     const userlogin = await data.findOne({ email: email });
 
-    const match = await bcrypt.compare(password, userlogin.password);
-
-    // console.log(userpass);
-    // console.log(userlogin);
-
     if (userlogin) {
+      const match = await bcrypt.compare(password, userlogin.password);
       if (match) {
+        const token = await userlogin.generateAauthToken();
+        res.cookie("jwtoken", token, {
+          expires: new Date(Date.now() + 604800000),
+          httponly: true,
+        });
         res.status(200).json({ message: "logged in " });
       } else {
         res.status(400).json({ message: "invalid information" });
@@ -81,6 +83,8 @@ router.post("/signin", async (req, res) => {
     } else {
       res.status(400).json({ message: "invalid information" });
     }
+
+    // console.log(match);
   } catch (err) {
     console.log("error from login ");
   }
