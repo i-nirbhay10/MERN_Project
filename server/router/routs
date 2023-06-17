@@ -20,9 +20,18 @@ router.get("/", (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const { name, email, work, mobailno, password, cpassword } = req.body;
+  const { firstname, lastname, email, work, mobailno, password, cpassword } =
+    req.body;
 
-  if (!name || !email || !work || !mobailno || !password || !cpassword) {
+  if (
+    !firstname ||
+    !lastname ||
+    !email ||
+    !work ||
+    !mobailno ||
+    !password ||
+    !cpassword
+  ) {
     res.status(422).json({ error: "plese fill all fieled" });
     console.log("all fesld not fill ");
   }
@@ -35,7 +44,8 @@ router.post("/register", async (req, res) => {
       res.status(422).json({ error: "user is allready exist" });
     } else {
       const user = new data({
-        name,
+        firstname,
+        lastname,
         email,
         work,
         mobailno,
