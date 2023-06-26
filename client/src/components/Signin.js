@@ -1,5 +1,5 @@
 import "./Styles/Signin.css";
-import pik from "./images/reg.jpg";
+import pic from "./images/reg.jpg";
 import { NavLink } from "react-router-dom";
 
 const Signin = () => {
@@ -54,7 +54,7 @@ const Signin = () => {
           <button className="button3">Forgot Password</button>
         </form>
         <div className="pic text-center">
-          <img src={pik} alt="regimg." style={{ width: "500px" }} />
+          <img src={pic} alt="regimg." style={{ width: "500px" }} />
           <h5 className="signin mt-3">
             If you don't have an acount
             <NavLink className="ms-2" to="/Signup">

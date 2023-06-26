@@ -1,0 +1,101 @@
+.formo {
+  --width-of-input: 200px;
+  --border-height: 1px;
+  --border-before-color: rgba(16, 15, 15, 0.921);
+  --border-after-color: #3873ea;
+  --input-hovered-color: #4985e01f;
+  position: relative;
+  width: var(--width-of-input);
+}
+/* styling of Input */
+.input {
+  color: #0b0b0b;
+  font-size: 0.9rem;
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+  border-bottom: var(--border-height) solid var(--border-before-color);
+}
+/* styling of animated border */
+.input-border {
+  position: absolute;
+  background: var(--border-after-color);
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  transition: 0.3s;
+}
+/* Hover on Input */
+input:hover {
+  background: var(--input-hovered-color);
+}
+
+input:focus {
+  outline: none;
+}
+/* here is code of animated border */
+input:focus ~ .input-border {
+  width: 100%;
+}
+/* === if you want to do animated border on typing === */
+/* remove input:focus code and uncomment below code */
+/* input:valid ~ .input-border{
+     width: 100%;
+   } */
+
+/* button */
+
+.conbutton {
+  display: inline-block;
+  width: 100px;
+  height: 45px;
+  border-radius: 10px;
+  border: 1px solid #03045e;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in;
+  z-index: 1;
+}
+
+.conbutton::before,
+.conbutton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 100%;
+  transform: skew(15deg);
+  transition: all 0.5s;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.conbutton::before {
+  left: -7px;
+  background: #240046;
+}
+
+.conbutton::after {
+  right: -7px;
+  background: #5a189a;
+}
+
+.conbutton:hover::before,
+.conbutton:hover::after {
+  width: 58%;
+}
+
+.conbutton:hover span {
+  color: #e0aaff;
+  transition: 0.3s;
+}
+
+.conbutton span {
+  color: #03045e;
+  font-size: 18px;
+  transition: all 0.3s ease-in;
+}

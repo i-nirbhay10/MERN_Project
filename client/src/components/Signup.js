@@ -1,11 +1,34 @@
+import { useState } from "react";
 import pik from "./images/reg.jpg";
 import { NavLink } from "react-router-dom";
 import "./Styles/Signup.css";
 const Signup = () => {
+  const [user, setuser] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    work: "",
+    mobailno: "",
+    password: "",
+    cpassword: "",
+  });
+
+  const clicked = () => {
+    setuser();
+  };
+  let name, value;
+
+  const datainput = (event) => {
+    name = event.target.name;
+    value = event.target.value;
+
+    setuser({ ...user, [name]: value });
+  };
+
   return (
     <>
-      <div className="ragisdiv shadow-lg d-flex">
-        <div className="pic text-center">
+      <div className="ragisdiv shadow-lg d-md-flex ">
+        <div className="pic d-none d-sm-block  text-center">
           <img src={pik} alt="regimg." style={{ width: "500px" }} />
           <h5 className="signin mt-3">
             Already have an acount ?
@@ -21,9 +44,11 @@ const Signup = () => {
           <div className="flex">
             <label>
               <input
-                required=""
+                required="true"
                 name="firstname"
-                placeholder="Firstname"
+                value={user.firstname}
+                onChange={datainput}
+                placeholder="First Name"
                 type="text"
                 className="input"
               />
@@ -33,7 +58,9 @@ const Signup = () => {
               <input
                 required=""
                 name="lastname"
-                placeholder="Lastname"
+                value={user.lastname}
+                onChange={datainput}
+                placeholder="Last Name"
                 type="text"
                 className="input"
               />
@@ -45,6 +72,8 @@ const Signup = () => {
             <input
               required=""
               name="email"
+              value={user.email}
+              onChange={datainput}
               placeholder="Email"
               type="email"
               className="input"
@@ -55,7 +84,9 @@ const Signup = () => {
             <input
               required=""
               name="work"
-              placeholder="Occopation"
+              value={user.work}
+              onChange={datainput}
+              placeholder="Occupation"
               type="text"
               className="input"
             />
@@ -65,7 +96,9 @@ const Signup = () => {
             <input
               required=""
               name="mobailno"
-              placeholder="Mobail Number"
+              value={user.mobailno}
+              onChange={datainput}
+              placeholder="Phone no"
               type="number"
               className="input"
             />
@@ -75,6 +108,8 @@ const Signup = () => {
             <input
               required=""
               name="password"
+              value={user.password}
+              onChange={datainput}
               placeholder="Password"
               type="password"
               className="input"
@@ -84,14 +119,18 @@ const Signup = () => {
           <label>
             <input
               required=""
-              name="cpassword"
+              name="cpassword*"
+              value={user.cpassword}
+              onChange={datainput}
               placeholder="Confirm password"
               type="password"
               className="input"
             />
             {/* <span>Confirm password</span> */}
           </label>
-          <button className="submit">Submit</button>
+          <button className="submit" onClick={clicked}>
+            Submit
+          </button>
         </form>
       </div>
     </>

@@ -1,0 +1,40 @@
+.usermaindiv {
+  margin-top: 50px;
+  padding: 5%;
+  background-color: rgba(7, 8, 12, 0.094);
+}
+
+.userimgdiv {
+  width: 80%;
+  margin: auto;
+  padding-top: 10px;
+}
+
+.userimg {
+  width: 150px;
+  height: 150px;
+}
+
+.col3 {
+  width: 150px;
+  height: 150px;
+  background-image: url("../images/reg.jpg");
+  background-size: 150px 150px;
+}
+
+.editcol3img {
+  margin-bottom: auto;
+}
+
+.editcol3img:hover {
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  background-color: aqua;
+}
+
+.userdetails {
+  width: 70%;
+  margin: auto;
+
+  background-color: rgba(8, 9, 9, 0.05);
+  margin-top: 30px;
+}
