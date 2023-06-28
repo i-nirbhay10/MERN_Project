@@ -1,8 +1,11 @@
 import { useState } from "react";
 import pik from "./images/reg.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Styles/Signup.css";
+
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [user, setuser] = useState({
     firstname: "",
     lastname: "",
@@ -13,9 +16,6 @@ const Signup = () => {
     cpassword: "",
   });
 
-  const clicked = () => {
-    setuser();
-  };
   let name, value;
 
   const datainput = (event) => {
@@ -23,6 +23,39 @@ const Signup = () => {
     value = event.target.value;
 
     setuser({ ...user, [name]: value });
+  };
+
+  const clicked = async (e) => {
+    e.preventDefault();
+    const { firstname, lastname, email, work, mobailno, password, cpassword } =
+      user;
+
+    const res = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstname,
+        lastname,
+        email,
+        work,
+        mobailno,
+        password,
+        cpassword,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.status === 422 || !data) {
+      window.alert("invelid data ");
+      console.log("invelid data ");
+    } else {
+      window.alert("registration successfull");
+      console.log("registration successfull");
+      navigate("/Signin");
+    }
   };
 
   return (
@@ -38,13 +71,13 @@ const Signup = () => {
           </h5>
         </div>
 
-        <form className="form">
+        <form method="POST" className="form">
           <p className="title">Register </p>
           <p className="message">Signup now and get full access to our app. </p>
           <div className="flex">
             <label>
               <input
-                required="true"
+                required=""
                 name="firstname"
                 value={user.firstname}
                 onChange={datainput}
@@ -119,17 +152,17 @@ const Signup = () => {
           <label>
             <input
               required=""
-              name="cpassword*"
+              name="cpassword"
               value={user.cpassword}
               onChange={datainput}
-              placeholder="Confirm password"
+              placeholder="* Confirm password"
               type="password"
               className="input"
             />
             {/* <span>Confirm password</span> */}
           </label>
           <button className="submit" onClick={clicked}>
-            Submit
+            Register
           </button>
         </form>
       </div>

@@ -55,7 +55,7 @@ router.post("/register", async (req, res) => {
 
       if (passmatch) {
         await user.save();
-        res.status(200).json({ message: "registration successful" });
+        res.status(201).json({ message: "registration successful" });
       } else {
         res.json({ error: "password not matched" });
       }

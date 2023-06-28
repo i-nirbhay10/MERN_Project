@@ -1,13 +1,47 @@
+import { useState } from "react";
 import "./Styles/Signin.css";
 import pic from "./images/reg.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Signin = () => {
+  const navigate = useNavigate();
+
+  const [email, setuseremail] = useState("");
+  const [password, setuserpass] = useState("");
+
+  const clicked = async (e) => {
+    console.log(email);
+    try {
+      e.preventDefault();
+
+      const res = await fetch("/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (data.status === 400 || !data) {
+        window.alert("invelid cradintial");
+        console.log("invelid cradintial");
+      } else {
+        window.alert("loged in");
+        console.log("loged in");
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <div className="logdiv shadow-lg mt-4 d-flex">
-        <form className="forml text-center">
-          <p id="heading">Login</p>
+      <div className="logdiv shadow-lg mt-4 d-md-flex">
+        <form method="POST" className="forml text-center">
+          <p id="heading">Login </p>
           <div className="field">
             <svg
               className="input-icon"
@@ -22,6 +56,8 @@ const Signin = () => {
             <input
               autocomplete="off"
               name="email"
+              value={email}
+              onChange={(event) => setuseremail(event.target.value)}
               placeholder="Email"
               className="input-field"
               type="email"
@@ -40,18 +76,20 @@ const Signin = () => {
             </svg>
             <input
               name="password"
+              value={password}
+              onChange={(e) => setuserpass(e.target.value)}
               placeholder="Password"
               className="input-field"
               type="password"
             />
           </div>
           <div className="btn">
-            <button className="button1">
+            <button onClick={clicked} className="button1">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </button>
-            <button className="button2">Sign Up</button>
+            {/* <button className="button2">Sign Up</button> */}
           </div>
-          <button className="button3">Forgot Password</button>
+          {/* <button className="button3">Forgot Password</button> */}
         </form>
         <div className="pic text-center">
           <img src={pic} alt="regimg." style={{ width: "500px" }} />
