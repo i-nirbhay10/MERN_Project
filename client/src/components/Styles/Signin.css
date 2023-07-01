@@ -1,24 +1,33 @@
 .logdiv {
-  margin-top: 30;
-  margin: auto;
-  padding: 20px;
-  width: 80%;
-  background-color: #07080c18;
-  /* background-color: rgba(138, 110, 210, 0.345); */
+  /* margin: auto; */
+  padding: 10%;
+  padding-top: 30px;
+  /* width: 80%; */
+  /* background-color: #3d56bab3; */
+  margin-top: 55px;
+}
+
+.marg {
+  margin-top: 80px;
+}
+
+.signinimg {
+  margin: 8px;
+  width: 450px;
 }
 
 .forml {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 30px;
-  padding-left: 2em;
-  padding-right: 2em;
-  padding-bottom: 0.4em;
+  margin: auto;
+  padding: 2em;
+  /* padding-right: 2em; */
+  /* padding-bottom: 0.4em; */
   background-color: #171717;
   border-radius: 25px;
   transition: 0.4s ease-in-out;
-  width: 370px;
+  /* width: 370px; */
 }
 
 .forml:hover {

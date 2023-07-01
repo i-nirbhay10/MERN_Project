@@ -1,21 +1,31 @@
 .ragisdiv {
-  margin-top: 50px;
-  padding: 20px;
+  margin: auto;
+  padding: 25px;
   padding-top: 30px;
   /* width: 80%; */
-  background-color: #07080c18;
+  background-color: #3d56bab3;
+  margin-top: 55px;
+}
+
+.signupimg {
+  margin: 8px;
+  width: 450px;
+}
+
+.pic {
+  margin: auto;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 350px;
-  background-color: rgba(187, 220, 102, 0.179);
-  padding: 20px;
+  gap: 8px;
+  max-width: 400px;
+  background-color: #f8fafa;
+  padding: 14px;
   border-radius: 20px;
   transition: 0.5s ease-in-out;
-  position: relative;
+  position: revert;
   margin: auto;
 }
 
@@ -144,8 +154,4 @@
     transform: scale(1.8);
     opacity: 0;
   }
-}
-
-.pic {
-  margin: auto;
 }

@@ -61,8 +61,8 @@ const Signup = () => {
   return (
     <>
       <div className="ragisdiv shadow-lg d-md-flex ">
-        <div className="pic d-none d-sm-block  text-center">
-          <img src={pik} alt="regimg." style={{ width: "500px" }} />
+        <div className="pic d-none d-sm-block text-center">
+          <img className="signupimg" src={pik} alt="regimg." />
           <h5 className="signin mt-3">
             Already have an acount ?
             <NavLink className="ms-2" to="/Signin">
@@ -77,6 +77,7 @@ const Signup = () => {
           <div className="flex">
             <label>
               <input
+                autoComplete="off"
                 required=""
                 name="firstname"
                 value={user.firstname}
@@ -89,6 +90,7 @@ const Signup = () => {
 
             <label>
               <input
+                autoComplete="off"
                 required=""
                 name="lastname"
                 value={user.lastname}
@@ -103,6 +105,7 @@ const Signup = () => {
 
           <label>
             <input
+              autoComplete="off"
               required=""
               name="email"
               value={user.email}
@@ -115,6 +118,7 @@ const Signup = () => {
           </label>
           <label>
             <input
+              autoComplete="off"
               required=""
               name="work"
               value={user.work}
@@ -127,6 +131,7 @@ const Signup = () => {
           </label>
           <label>
             <input
+              autoComplete="off"
               required=""
               name="mobailno"
               value={user.mobailno}
@@ -139,6 +144,7 @@ const Signup = () => {
           </label>
           <label>
             <input
+              autoComplete="off"
               required=""
               name="password"
               value={user.password}

@@ -1,4 +1,17 @@
-.formo {
+.conmaindiv {
+  margin-top: 55px;
+}
+
+.formfitst {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px;
+
+  /* background-color: white; */
+}
+
+.inputstyle {
   --width-of-input: 200px;
   --border-height: 1px;
   --border-before-color: rgba(16, 15, 15, 0.921);

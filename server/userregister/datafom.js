@@ -34,6 +34,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  messages: [
+    {
+      firstname: {
+        type: String,
+        required: true,
+      },
+
+      email: {
+        type: String,
+        required: true,
+      },
+      message: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   tokens: [
     {
       token: {
@@ -59,14 +76,32 @@ userSchema.pre("save", async function (next) {
 });
 
 // token generatink
-userSchema.methods.generateAauthToken = async function () {
+userSchema.methods.generateAuthToken = async function () {
   try {
     let token = jwt.sign({ _id: this._id }, process.env.HIDDEN_KEY);
     this.tokens = this.tokens.concat({ token: token });
     await this.save();
+    console.log("token generate");
     return token;
   } catch (error) {
     console.log(error);
+  }
+};
+
+userSchema.methods.messagepush = async function (firstname, email, message) {
+  try {
+    console.log("message push schema runs");
+    this.messages = this.messages.concat({
+      firstname,
+      email,
+      message,
+    });
+    await this.save();
+    console.log("push return");
+    return this.messages.concat({ message });
+  } catch (e) {
+    console.log(e);
+    console.log("message push not runse");
   }
 };
 

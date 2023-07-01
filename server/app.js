@@ -2,6 +2,11 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
+const cookieParser = require("cookie-parser");
+
+//using cookie parser
+app.use(cookieParser());
+
 dotenv.config({ path: "./.env" });
 require("./db/connection");
 // const User = require("./userregister/datafom");
@@ -13,10 +18,10 @@ app.use(require("./router/routs"));
 
 const port = process.env.PORT;
 
-middeleware = (req, res, next) => {
-  console.log("this is middelwere response");
-  next();
-};
+// middeleware = (req, res, next) => {
+//   console.log("this is middelwere response");
+//   next();
+// };
 
 // get routing
 

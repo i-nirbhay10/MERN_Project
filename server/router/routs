@@ -1,17 +1,26 @@
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+
+const cookieParser = require("cookie-parser");
+
+//using cookie parser
+router.use(cookieParser());
+// use middeleware file
+
+const auth = require("../middleware/auth");
+
 require("../db/connection");
 const data = require("../userregister/datafom");
 
 // use middeleware
 
-middeleware = (req, res, next) => {
-  console.log("this is middelwere response");
-  next();
-};
+// middeleware = (req, res, next) => {
+//   console.log("this is middelwere response");
+//   next();
+// };
 
 // get routing
 
@@ -81,11 +90,14 @@ router.post("/signin", async (req, res) => {
     if (userlogin) {
       const match = await bcrypt.compare(password, userlogin.password);
       if (match) {
-        const token = await userlogin.generateAauthToken();
+        const token = await userlogin.generateAuthToken();
+
         res.cookie("jwtoken", token, {
           expires: new Date(Date.now() + 604800000),
-          httponly: true,
+          httpOnly: true,
         });
+        console.log(token);
+
         res.status(200).json({ message: "logged in " });
       } else {
         res.status(400).json({ message: "invalid information" });
@@ -100,12 +112,37 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-router.get("/about", middeleware, (req, res) => {
-  res.send("hello world this about page from  router created by nirbhay");
+//dashboard request with middeleware
+
+router.get("/Dashboard", auth, (req, res) => {
+  res.send(req.topid_data);
   console.log("this is about response");
 });
 
-router.get("/service", (req, res) => {
+router.post("/contect", auth, async (req, res) => {
+  try {
+    const { firstname, email, message } = req.body;
+    console.log(req.body);
+
+    if (!firstname || !email || !message) {
+      res.json({ error: "plz fill all filed" });
+    }
+
+    const match = await data.findOne({ _id: req.userID });
+
+    if (match) {
+      const matchget = await match.messagepush(firstname, email, message);
+      console.log(matchget);
+      await match.save();
+      console.log("msg saved");
+
+      // res.status(201).json({ message: "message saved successfully" });
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("server contect not run");
+  }
+
   res.send("hello world this is service page created by nirbhay");
 });
 
