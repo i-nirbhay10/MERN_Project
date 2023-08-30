@@ -1,13 +1,99 @@
 // import react from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { userContext } from "../App";
 
 const Nav = () => {
+  const { state } = useContext(userContext);
+
+  const Tognev = () => {
+    if (state) {
+      return (
+        <>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/">
+                  Home
+                </Link>
+              </li>
+              {/* <li className="nav-item active">
+                    <Link className="nav-link" to="/Signup">
+                      Signup
+                    </Link>
+                  </li>
+                  <li className="nav-item active">
+                    <Link className="nav-link" to="/Signin">
+                      Signin
+                    </Link>
+                  </li>  */}
+              <li className="nav-item active">
+                <Link className="nav-link" to="/Contact">
+                  Contact us
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/Dashboard">
+                  Dashboard
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/logout">
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/Signup">
+                  Sign up
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/Signin">
+                  Sign in
+                </Link>
+              </li>
+              {/*<li className="nav-item active">
+                <Link className="nav-link" to="/Contact">
+                  Contact
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/Dashboard">
+                  Dashboard
+                </Link>
+              </li>
+               <li className="nav-item">
+                    <Link className="nav-link" to="/logout">
+                      Logout
+                    </Link>
+                  </li> */}
+            </ul>
+          </div>
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <nav className="navbar fixed-top navbar-expand-lg bg-info">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            Navbar
+            MERN-by-Nv
           </Link>
           <button
             className="navbar-toggler"
@@ -20,35 +106,7 @@ const Nav = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item active">
-                <Link className="nav-link" to="/Signup">
-                  Signup
-                </Link>
-              </li>
-              <li className="nav-item active">
-                <Link className="nav-link" to="/Signin">
-                  Signin
-                </Link>
-              </li>
-              <li className="nav-item active">
-                <Link className="nav-link" to="/Contact">
-                  Contact
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/Dashboard">
-                  Dashboard
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <Tognev />
         </div>
       </nav>
     </>

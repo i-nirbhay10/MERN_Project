@@ -48,9 +48,11 @@ const Signup = () => {
 
     const data = await res.json();
 
-    if (data.status === 422 || !data) {
+    if (res.status === 422 || !data) {
       window.alert("invelid data ");
       console.log("invelid data ");
+      console.log(res);
+      // console.log(res.status.json);
     } else {
       window.alert("registration successfull");
       console.log("registration successfull");

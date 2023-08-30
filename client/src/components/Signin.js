@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Styles/Signin.css";
 import pic from "./images/reg.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
 
+import { userContext } from "../App";
+
 const Signin = () => {
+  const { state, dispatch } = useContext(userContext);
+  // console.log(user);
+
   const navigate = useNavigate();
 
   const [email, setuseremail] = useState("");
@@ -25,10 +30,11 @@ const Signin = () => {
 
       const data = await res.json();
 
-      if (data.status === 400 || !data) {
+      if (res.status === 400 || !data) {
         window.alert("invelid cradintial");
         console.log("invelid cradintial");
       } else {
+        dispatch({ type: "USER", payload: true });
         window.alert("loged in");
         console.log("loged in");
         navigate("/");

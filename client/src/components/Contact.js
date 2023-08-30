@@ -6,9 +6,9 @@ const Contact = () => {
   const navigate = useNavigate();
 
   const [inputdata, setinputdata] = useState({
-    firstname: "",
-    email: "",
-    message: "",
+    firstname: " ",
+    email: " ",
+    message: " ",
   });
 
   const getuserdata = async () => {
@@ -33,7 +33,7 @@ const Contact = () => {
     }
   };
 
-  const { firstname, lastname, email } = inputdata;
+  const { firstname, email } = inputdata;
 
   useEffect(() => {
     getuserdata();
@@ -64,11 +64,11 @@ const Contact = () => {
         }),
       });
 
+      setinputdata({ ...inputdata, message: " " });
       if (res) {
         console.log("message send");
         console.log(res);
         console.log(inputdata);
-        setinputdata({ ...inputdata, message: "" });
       }
     } catch (error) {
       console.log(error);
@@ -81,34 +81,14 @@ const Contact = () => {
       <div className="conmaindiv">
         <div className="d-md-flex justify-content-evenly pt-5">
           {/* <div>{inputdata}</div> */}
-          <div className="inputstyle">
-            <input
-              className="input"
-              value=""
-              placeholder="Name"
-              required=""
-              type="text"
-            />
-            <span className="input-border"></span>
+          <div className="">
+            <h6> Phone no.</h6>
+            <i class="bi bi-telephone-outbound-fill text-info"></i>
+            <span className="ms-2">+91 8787280000</span>
           </div>
-          <div className="inputstyle">
-            <input
-              className="input"
-              placeholder="Email"
-              required=""
-              type="email"
-            />
-            <span className="input-border"></span>
-          </div>
-
-          <div className="inputstyle ">
-            <input
-              className="input"
-              placeholder="Phon no"
-              required=""
-              type="text"
-            />
-            <span className="input-border"></span>
+          <div className="">
+            <h6>Email</h6>
+            <span className="ms-2">mernappbynv@gmail.com</span>
           </div>
         </div>
 
@@ -158,7 +138,7 @@ const Contact = () => {
 
             <div className="mb-3">
               <span>message</span>
-
+              <i class="bi-alarm" style={{ fontSize: "20px" }}></i>
               <textarea
                 className="form-control my-3"
                 id="exampleFormControlTextarea1"
@@ -178,6 +158,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      <i class="bi bi-telephone-outbound-fill text-info"> hello</i>
     </>
   );
 };

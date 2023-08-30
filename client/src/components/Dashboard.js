@@ -59,7 +59,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="userdetails">
+          <div className="userdetails text-danger text-capitalize bg-light">
             <div className="row p-3 ">
               <div className="col-4">
                 <p className="userdata">User id : </p>
@@ -69,7 +69,7 @@ const Dashboard = () => {
                 <p className="userdata">Occupstion : </p>
                 <p className="userdata">Hobby : </p>
               </div>
-              <div className="col-4">
+              <div className="col-6">
                 <p className="userdata">{_id}</p>
                 <p className="userdata">
                   {firstname} {lastname}
@@ -79,13 +79,13 @@ const Dashboard = () => {
                 <p className="userdata">{work}</p>
                 <p className="userdata">chesh playing</p>
               </div>
-              <div className="col-md-4">
+              {/* <div className="col-md-4">
                 <div className="col3 rounded-circle m-3">
                   <div className="editcol3img ">
                     <p className=" text-primary text-justify ">Choose photo</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
